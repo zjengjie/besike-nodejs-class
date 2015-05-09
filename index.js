@@ -1,6 +1,9 @@
-module.exports = function(init, parent) {
+module.exports = function(init) {
+	var obj = {};
 	if (init.initialize) {
-		init.constructor = init.initialize;
+		obj.constructor = init.initialize;
+		delete init.initialize;
 	}
-	return init.constructor;
+	obj.constructor.prototype = init;
+	return obj.constructor;
 }
